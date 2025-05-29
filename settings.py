@@ -2,9 +2,9 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='monopoly_boycott',
+        name='boycott_game',
         display_name="Monopoly Boycott Game",
-        app_sequence=['monopoly_boycott_app'],
+        app_sequence=['boycott_game'],
         num_demo_participants=3,
         demand_slope='step',
         use_chat=True,
