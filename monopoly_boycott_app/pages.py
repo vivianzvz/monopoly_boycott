@@ -17,7 +17,7 @@ class WaitForConsumers(WaitPage):
 
 class ChatPage(Page):
     live_method = 'live_chat'
-    timeout_seconds = 120
+    timeout_seconds = 90
 
     def is_displayed(self):
         return self.player.player_role == 'consumer' and self.round_number >= 6
@@ -25,6 +25,7 @@ class ChatPage(Page):
 class PriceDecision(Page):
     form_model = 'player'
     form_fields = ['price']
+    timeout_seconds = 60
 
     def is_displayed(self):
         return self.player.player_role == 'monopolist'
@@ -59,7 +60,13 @@ class PriceDecision(Page):
             player_id=self.player.id_in_group,
             block_number=((self.round_number - 1) // 5) + 1,
             history=history
-        )
+            )
+
+    def before_next_page(self):
+        if self.timeout_happened and self.player.price is None:
+            self.player.price = 0  # or any reasonable default
+
+
 
 
 class WaitForMonopolist(WaitPage):
