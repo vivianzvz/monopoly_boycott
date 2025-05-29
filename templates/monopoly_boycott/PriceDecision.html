@@ -1,0 +1,63 @@
+{% extends "global/Page.html" %}
+{% block content %}
+
+<h3>Monopolist Decision</h3>
+
+<table style="width:100%; border:1px solid black; text-align:center; margin-bottom:1em;">
+  <tr>
+    <td><strong>Block {{ block_number }}</strong></td>
+    <td><strong>Round {{ round_number }}</strong></td>
+    <td><strong>Player ID {{ player_id }}</strong></td>
+    <td><strong>Timer ___</strong></td>
+  </tr>
+</table>
+
+<h4>Info: Consumer Values</h4>
+
+<table style="border-collapse: collapse; width: 50%; text-align: center;">
+  <tr>
+    <th style="border: 1px solid black;">ID</th>
+    <th style="border: 1px solid black;">Value</th>
+  </tr>
+  {% for id, value in consumer_values %}
+  <tr>
+    <td style="border: 1px solid black;">{{ id }}</td>
+    <td style="border: 1px solid black;">{{ value }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<br><br>
+
+<label>Set the price for this period:</label><br>
+{{ formfield 'price' }}
+
+<button class="btn btn-primary">Submit</button>
+
+
+
+<h4>History</h4>
+<table style="border-collapse: collapse; width: 100%; text-align: center;">
+  <tr>
+    <th style="border: 1px solid black;">Round</th>
+    <th style="border: 1px solid black;">Price</th>
+    <th style="border: 1px solid black;">Units Sold</th>
+    <th style="border: 1px solid black;">Monop. Profit</th>
+    {% for id, _ in consumer_values %}
+      <th style="border: 1px solid black;">ID{{ id }} Earning</th>
+    {% endfor %}
+  </tr>
+  {% for row in history %}
+    <tr>
+      <td style="border: 1px solid black;">{{ row.round_number }}</td>
+      <td style="border: 1px solid black;">{{ row.price }}</td>
+      <td style="border: 1px solid black;">{{ row.units_sold }}</td>
+      <td style="border: 1px solid black;">{{ row.profit }}</td>
+      {% for e in row.earnings %}
+        <td style="border: 1px solid black;">{{ e }}</td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

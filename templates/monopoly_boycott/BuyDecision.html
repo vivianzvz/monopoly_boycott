@@ -1,0 +1,18 @@
+{% extends "global/Page.html" %}
+{% block content %}
+
+<h3>Buy Decision</h3>
+
+<p>Your endowment: <strong>{{ player.endowment }}</strong></p>
+<p>Do you want to buy the product at the price set by the monopolist?</p>
+
+{% if show_price %}
+    <p>The monopolist's price is: <strong>{{ monopolist_price }}</strong></p>
+{% else %}
+    <p><em>Waiting for the monopolist to set a price...</em></p>
+{% endif %}
+
+{{ formfields }}
+{{ next_button }}
+
+{% endblock %}

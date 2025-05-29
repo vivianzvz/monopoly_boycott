@@ -1,0 +1,7 @@
+{% extends "global/Page.html" %}
+{% block content %}
+<h3>Round Results</h3>
+<p>The monopolist set the price at: <strong>{{ price }}</strong></p>
+<p>Your payoff this round: <strong>{{ player.payoff }}</strong></p>
+{{ next_button }}
+{% endblock %}

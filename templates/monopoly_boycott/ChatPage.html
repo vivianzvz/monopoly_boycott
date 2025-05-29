@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% block content %}
+
+<h3>Live Chat (Consumers Only)</h3>
+
+<div id="chat-box" style="height:200px; overflow-y:auto; border:1px solid #ccc; background:#f9f9f9;"></div>
+<input id="chat-input" type="text" placeholder="Type your message...">
+<button type="button" onclick="sendMessage()">Send</button>
+
+<script>
+    // receives data from the server
+    function liveRecv(data) {
+        const box = document.getElementById("chat-box");
+        const msg = document.createElement("div");
+        msg.textContent = data.msg;  // example: "Player 1: hi"
+        box.appendChild(msg);
+        box.scrollTop = box.scrollHeight;  // auto-scroll to bottom
+    }
+
+    function sendMessage() {
+        const input = document.getElementById("chat-input");
+        const value = input.value.trim();
+        if (value !== '') {
+            liveSend({ msg: value });  // send to server
+            input.value = '';
+        }
+    }
+
+    // allow Enter key to send message
+    document.getElementById("chat-input").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault(); // prevent any form submission
+            sendMessage();
+        }
+    });
+
+    // confirm script loaded
+    console.log("✅ Script loaded and liveRecv should be available.");
+</script>
+{% endblock %}
