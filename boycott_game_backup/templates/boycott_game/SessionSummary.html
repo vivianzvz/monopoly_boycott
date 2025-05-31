@@ -1,0 +1,12 @@
+{% extends "global/Page.html" %}
+{% block content %}
+
+<h2>Session Summary</h2>
+
+<p>The sum of your earned points is: <strong>{{ total_points }}</strong></p>
+<p>You are paid ${{ conversion_rate }} per point.</p>
+<p><strong>Your total earnings:</strong> ${{ earnings_formatted }}</p>
+
+<p>Thank you for participating!</p>
+
+{% endblock %}

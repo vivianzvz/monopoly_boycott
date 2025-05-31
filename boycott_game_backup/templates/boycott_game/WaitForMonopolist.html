@@ -1,0 +1,11 @@
+class WaitForMonopolist(WaitPage):
+    def is_displayed(self):
+        return self.player.player_role == 'consumer'
+
+    def after_all_players_arrive(self):
+        # Do nothing; we just need to wait for the monopolist
+        pass
+
+    def is_ready(self):
+        monopolist = [p for p in self.group.get_players() if p.player_role == 'monopolist'][0]
+        return monopolist.price is not None

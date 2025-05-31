@@ -1,5 +1,5 @@
 from os import environ
-
+#
 SESSION_CONFIGS = [
     dict(
         name='boycott_game',

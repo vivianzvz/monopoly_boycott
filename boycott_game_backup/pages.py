@@ -29,11 +29,7 @@ class ChatPage(Page):
 
     def vars_for_template(self):
         monopolist = [p for p in self.group.get_players() if p.player_role == 'monopolist'][0]
-        return dict(
-            monopolist_price=getattr(monopolist, 'price', None),
-            consumer_value=self.player.endowment
-        )
-
+        return dict(monopolist_price=monopolist.field_maybe_none('price'))
 
 
 class PriceDecision(Page):
@@ -78,7 +74,7 @@ class PriceDecision(Page):
             )
 
     def before_next_page(self):
-        if self.timeout_happened and getattr(self.player, 'price', None) is None:
+        if self.timeout_happened and self.player.field_maybe_none('price') is None:
             self.player.price = 0  # or any reasonable default
 
 

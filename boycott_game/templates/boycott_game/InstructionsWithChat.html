@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+{% block content %}
+
+<h2>Welcome to the Monopolist Boycott Game</h2>
+
+<ul>
+    <li>You are either a <strong>monopolist</strong> or a <strong>consumer</strong>.</li>
+    <li>In each round, the monopolist sets a price.</li>
+    <li>Consumers will decide whether to buy at that price.</li>
+    <li><strong>In the following rounds, consumers will be able to communicate with one another before making a decision.</strong></li>
+    <li>Your earnings depend on your role, the price, and the decisions made.</li>
+    <li><strong>If you are the monopolist:</strong> your earnings = price × number of consumers who buy.</li>
+    <li><strong>If you are a consumer:</strong> if you buy, your earnings = your value − price; if you don’t buy, your earnings = 0.</li>
+</ul>
+
+<p>Click "Next" to begin.</p>
+{% next_button %}
+
+{% endblock %}
