@@ -1,6 +1,6 @@
 # Monopoly Boycott Game (oTree)
 
-This repository contains the oTree implementation of the **Monopoly Boycott Game**, developed for ECON 165 at UC Santa Cruz.
+This repository contains the oTree implementation of the **Monopoly Boycott Game**, developed for ECON 165 at UC Santa Cruz. The project idea originated from Jennifer Sotelo Perez, Isaac Robles, and Ryan Bradley.
 
 ## 🧠 Purpose
 The experiment models a simple monopolist-consumer market, where:
