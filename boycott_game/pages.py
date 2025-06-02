@@ -114,15 +114,21 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     def vars_for_template(self):
-        monopolist = [p for p in self.group.get_players() if p.player_role == 'monopolist'][0]
+        group = self.group
+
+        # 1) Get the monopolist and its current price
+        monopolist = [p for p in group.get_players() if p.player_role == 'monopolist'][0]
         price = getattr(monopolist, 'price', None)
 
-        consumers = [p for p in self.group.get_players() if p.player_role == 'consumer']
-        consumer_values = [(p.id_in_group, p.endowment) for p in consumers]
+        # 2) Build a list of all consumer players (for the table)
+        consumers = [p for p in group.get_players() if p.player_role == 'consumer']
 
-        # Collect all prior rounds (including current one)
+        # 3) If you want each consumer's (id, endowment) for the history header
+        consumer_values = [(c.id_in_group, c.endowment) for c in consumers]
+
+        # 4) Build a history of all past rounds (including the current one)
+        #    so the template can render the “History” table.
         prior_rounds = self.player.in_previous_rounds() + [self.player]
-
         history = []
         for past_player in prior_rounds:
             past_group = past_player.group
@@ -142,8 +148,10 @@ class Results(Page):
                 )
                 history.append(row)
 
+        # 5) Return all variables the Results.html template needs:
         return dict(
             price=price,
+            other_consumers=consumers,
             consumer_values=consumer_values,
             history=history,
         )

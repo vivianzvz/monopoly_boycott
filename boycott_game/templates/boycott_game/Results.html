@@ -1,20 +1,68 @@
-{% extends "otree/Page.html" %}
+{% extends "global/Page.html" %}
 {% load otree %}
+
+
 {% block content %}
 
-<h3>Round Results</h3>
 
-<p>The monopolist set the price at: <strong>{{ price }}</strong></p>
+ <h3>Round Results</h3>
 
-{% if player.buy_choice == 'buy' %}
-    <p>You chose to: <strong>BUY</strong></p>
-{% elif player.buy_choice == 'not_buy' %}
-    <p>You chose to: <strong>NOT BUY</strong></p>
-{% else %}
-    <p>You did not make a buying choice this round.</p>
-{% endif %}
 
-<p>Your payoff this round: <strong>{{ player.payoff }}</strong></p>
+ <p>The monopolist set the price at: <strong>{{ price }}</strong></p>
+ <p>Your payoff this round: <strong>{{ player.payoff }}</strong></p>
+
+
+ {# ==== ONLY show “you chose BUY/NOT BUY” if this is a consumer ==== #}
+ {% if player.player_role == 'consumer' %}
+    
+     {# Now it’s safe to access player.buy_choice because we know this is a consumer #}
+     {% if player.buy_choice == 'buy' %}
+         <p style="font-weight: bold; color: green;">
+           You chose to <strong>BUY</strong> this round.
+         </p>
+     {% elif player.buy_choice == 'no_buy' %}
+         <p style="font-weight: bold; color: red;">
+           You chose to <strong>NOT BUY</strong> this round.
+         </p>
+     {% else %}
+         <p>You did not make a buying choice this round.</p>
+     {% endif %}
+
+
+     <hr/>
+ {% endif %}
+
+
+ {# ==== Table of all consumers (their values, choices, payoffs) ==== #}
+ <h4>All Consumers This Round</h4>
+ <table border="1" cellpadding="5" cellspacing="0">
+   <thead>
+     <tr>
+       <th>Consumer ID</th>
+       <th>Value</th>
+       <th>Choice</th>
+       <th>Payoff</th>
+     </tr>
+   </thead>
+   <tbody>
+     {% for c in other_consumers %}
+       <tr>
+         <td>{{ c.id_in_group }}</td>
+         <td>{{ c.endowment }}</td>
+         <td>
+           {% if c.buy_choice == 'buy' %}
+             BUY
+           {% else %}
+             NOT BUY
+           {% endif %}
+         </td>
+         <td>{{ c.payoff }}</td>
+       </tr>
+     {% endfor %}
+   </tbody>
+ </table>
+
+
 
 
 <hr>
