@@ -10,10 +10,9 @@ Monopolist Boycott Game:
 """
 
 class C(BaseConstants):
-    name_in_url = 'boycott_game'
-    players_per_group = 3  # 1 monopolist + 2 consumers
-    num_rounds = 10
-Constants = C
+    NAME_IN_URL = 'boycott_game'
+    PLAYERS_PER_GROUP = 3  # 1 monopolist + 5 consumers ==> changed if from 3 to 6
+    NUM_ROUNDS = 10
 
 class Subsession(BaseSubsession):
     def creating_session(self):
