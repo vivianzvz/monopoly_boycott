@@ -25,18 +25,10 @@ class Subsession(BaseSubsession):
             p.player_role = 'consumer'
 
         for p in players:
-            if p.player_role == 'consumer':
-                # Block 1: Rounds 1–5
-                if self.round_number <= 5:
-                    if 'block1_endowment' not in p.participant.vars:
-                        p.participant.vars['block1_endowment'] = random.choice([105, 110, 115, 120, 125])
-                    p.endowment = p.participant.vars['block1_endowment']
-
-                # Block 2: Rounds 6–10
-                else:
-                    if 'block2_endowment' not in p.participant.vars:
-                        p.participant.vars['block2_endowment'] = random.choice([138, 140, 142, 144, 146])
-                    p.endowment = p.participant.vars['block2_endowment']
+           if p.player_role == 'consumer':
+               if self.round_number == 1:
+                   p.participant.vars['endowment'] = random.choice([113, 116, 119, 122, 125])
+               p.endowment = p.participant.vars['endowment']
 
 
 class Group(BaseGroup):
