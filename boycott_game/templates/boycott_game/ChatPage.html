@@ -1,11 +1,12 @@
 {% extends "global/Page.html" %}
 {% block content %}
 
+<h3>Live Chat (Consumers Only)</h3>
+
+<p style="font-weight: bold;">Consumer Payoffs: (Your Value) - (Monopoly Price)</p>
 
 <p>The monopolist has set the price to: <strong>{{ monopolist_price }}</strong></p>
 <p>Your value: <strong>{{ consumer_value }}</strong></p>
-
-<h3>Live Chat (Consumers Only)</h3>
 
 <div id="chat-box" style="height:200px; overflow-y:auto; border:1px solid #ccc; background:#f9f9f9;"></div>
 <input id="chat-input" type="text" placeholder="Type your message...">
