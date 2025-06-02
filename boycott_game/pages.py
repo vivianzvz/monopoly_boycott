@@ -159,7 +159,7 @@ class Results(Page):
 
 class SessionSummary(Page):
     def is_displayed(self):
-        return self.round_number == C.num_rounds
+        return self.round_number == C.NUM_ROUNDS
 
     def vars_for_template(self):
         total_points = sum([float(p.payoff) for p in self.player.in_all_rounds()])
