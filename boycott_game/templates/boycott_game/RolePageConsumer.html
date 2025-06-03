@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+{% block content %}
+<h3>Welcome to the Experiment</h3>
+<p>You have been assigned the role of a <strong>{{ player.player_role }}</strong>.</p>
+
+<p style="font-weight: bold; margin-top: 30px;">As a consumer, your goal is to strategize in order to maximize your payoffs to retain more of your value. For reference, this is how to calculate your payoffs:</p>
+<li style="margin-bottom: 20px;">Consumer Payoff: (Your Value) - (Monopoly Price)</lie>
+
+<p style="font-weight: bold; font-size: 20px; margin-top: 20px;">Individually, the higher the payoff you have, the more money you'll win at the end of the session.</p>
+
+
+<p style="font-weight: bold;">Have fun!</p>
+
+{% next_button %}
+{% endblock %}

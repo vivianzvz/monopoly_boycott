@@ -12,9 +12,13 @@ class InstructionsWithChat(Page):
     def is_displayed(self):
         return self.round_number == 6
 
-class RolePage(Page):
+class RolePageMonopolist(Page):
     def is_displayed(self):
-        return self.round_number == 1
+        return self.round_number == 1 and self.player.player_role == 'monopolist'
+    
+class RolePageConsumer(Page):
+    def is_displayed(self):
+        return self.round_number == 1 and self.player.player_role == 'consumer'
 
 class WaitForConsumers(WaitPage):
     def is_displayed(self):
@@ -99,13 +103,22 @@ class BuyDecision(Page):
     def is_displayed(self):
         return self.player.player_role == 'consumer'
 
+
     def vars_for_template(self):
-        monopolist = [p for p in self.group.get_players() if p.player_role == 'monopolist'][0]
-        price = getattr(monopolist, 'price', None)
-        return dict(
-            monopolist_price=price,
-            show_price=price is not None
-        )
+            monopolist = [p for p in self.group.get_players() if p.player_role == 'monopolist'][0]
+            price = monopolist.field_maybe_none('price')
+            return dict(
+                monopolist_price=price,
+                show_price=price is not None
+            )
+
+#    def vars_for_template(self):
+#        monopolist = [p for p in self.group.get_players() if p.player_role == 'monopolist'][0]
+#        price = getattr(monopolist, 'price', None)
+#        return dict(
+#            monopolist_price=price,
+#            show_price=price is not None
+#        )
 
 
 
@@ -163,7 +176,7 @@ class SessionSummary(Page):
 
     def vars_for_template(self):
         total_points = sum([float(p.payoff) for p in self.player.in_all_rounds()])
-        conversion_rate = 0.01
+        conversion_rate = 0.05
         earnings = total_points * conversion_rate
         return dict(
             total_points=int(total_points),
@@ -176,7 +189,8 @@ class SessionSummary(Page):
 
 page_sequence = [
     InstructionsNoChat,
-    RolePage,
+    RolePageMonopolist,
+    RolePageConsumer,
 
     InstructionsWithChat,
 
