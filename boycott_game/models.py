@@ -11,7 +11,7 @@ Monopolist Boycott Game:
 
 class C(BaseConstants):
     NAME_IN_URL = 'boycott_game'
-    PLAYERS_PER_GROUP = 6  # 1 monopolist + 5 consumers ==> changed if from 3 to 6
+    PLAYERS_PER_GROUP = 3  # 1 monopolist + 5 consumers ==> changed if from 3 to 6
     NUM_ROUNDS = 10
 
 class Subsession(BaseSubsession):
@@ -26,7 +26,7 @@ class Subsession(BaseSubsession):
         for p in players:
            if p.player_role == 'consumer':
                if self.round_number == 1:
-                   p.participant.vars['endowment'] = random.choice([113, 116, 119, 122, 125])
+                   p.participant.vars['endowment'] = random.choice([113, 116, 119, 122, 125]) # CHECK THIS
                p.endowment = p.participant.vars['endowment']
 
 

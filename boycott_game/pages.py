@@ -81,6 +81,7 @@ class PriceDecision(Page):
             history=history
             )
 
+
     def before_next_page(self):
         if self.timeout_happened and getattr(self.player, 'price', None) is None:
             self.player.price = 0  # or any reasonable default

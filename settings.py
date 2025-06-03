@@ -5,7 +5,7 @@ SESSION_CONFIGS = [
         name='boycott_game',
         display_name="Monopoly Boycott Game",
         app_sequence=['boycott_game'],
-        num_demo_participants=6,
+        num_demo_participants=3,
         demand_slope='step',
         use_chat=True,
     ),
