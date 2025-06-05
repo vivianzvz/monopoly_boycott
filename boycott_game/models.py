@@ -26,7 +26,7 @@ class Subsession(BaseSubsession):
         for p in players:
            if p.player_role == 'consumer':
                if self.round_number == 1:
-                   p.participant.vars['endowment'] = random.choice([113, 116, 119, 122, 125]) # CHECK THIS
+                   p.participant.vars['endowment'] = random.choice([13, 16, 19, 22, 25])
                p.endowment = p.participant.vars['endowment']
 
 
