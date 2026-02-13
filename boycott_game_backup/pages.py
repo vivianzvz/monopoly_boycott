@@ -149,7 +149,7 @@ class SessionSummary(Page):
     def is_displayed(self):
         return self.round_number == C.num_rounds
 
-    def vars_for_template(self):
+    # def vars_for_template(self):
         total_points = sum([float(p.payoff) for p in self.player.in_all_rounds()])
         conversion_rate = 0.05
         earnings = total_points * conversion_rate
@@ -158,6 +158,27 @@ class SessionSummary(Page):
             conversion_rate=conversion_rate,
             earnings_formatted="{:.2f}".format(earnings)  # force 2 decimal display
         )
+    
+    def vars_for_template(self):
+        total_points = sum([float(p.payoff) for p in p.player_role == 'monopolist'])
+        conversion_rate = 0.05
+        earnings = total_points * conversion_rate
+        return dict(
+            total_points=int(total_points),
+            conversion_rate=conversion_rate,
+            earnings_formatted="{:.2f}".format(earnings)  # force 2 decimal display
+        )
+    
+    def vars_for_template(self):
+        total_points = sum([float(p.payoff) for p in p.player_role == 'consumer'])
+        conversion_rate = 0.15
+        earnings = total_points * conversion_rate
+        return dict(
+            total_points=int(total_points),
+            conversion_rate=conversion_rate,
+            earnings_formatted="{:.2f}".format(earnings)  # force 2 decimal display
+        )
+    
 
 
 

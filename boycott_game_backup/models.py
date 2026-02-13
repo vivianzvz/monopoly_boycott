@@ -5,14 +5,14 @@ doc = """
 Monopolist Boycott Game:
 - One monopolist, multiple consumers.
 - No communication for rounds 1–5.
-- Chat available to consumers in rounds 6–20.
+- Chat available to consumers in rounds 6–10.
 - Monopolist sets price, consumers decide whether to buy.
 """
 
 class C(BaseConstants):
     name_in_url = 'boycott_game'
     players_per_group = 3  # 1 monopolist + 2 consumers
-    num_rounds = 10
+    num_rounds = 10 # change to 16 rounds
 Constants = C
 
 class Subsession(BaseSubsession):
@@ -27,12 +27,12 @@ class Subsession(BaseSubsession):
         for p in players:
             if p.player_role == 'consumer':
                 # Block 1: Rounds 1–5
-                if self.round_number <= 5:
+                if self.round_number <= 5: # change 5 to 8
                     if 'block1_endowment' not in p.participant.vars:
                         p.participant.vars['block1_endowment'] = random.choice([105, 110, 115, 120, 125])
                     p.endowment = p.participant.vars['block1_endowment']
 
-                # Block 2: Rounds 6–10
+                # Block 2: Rounds 6–10 
                 else:
                     if 'block2_endowment' not in p.participant.vars:
                         p.participant.vars['block2_endowment'] = random.choice([138, 140, 142, 144, 146])
