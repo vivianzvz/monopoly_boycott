@@ -186,19 +186,15 @@ class SessionSummary(Page):
         )
 
     def vars_for_template(self):
-        total_points = sum([float(p.payoff) for p in p.player_role == 'monopolist'])
-        conversion_rate = 0.05
+        total_points = sum([float(p.payoff) for p in self.player.in_all_rounds()])
+
+        if self.player.player_role == 'monopolist':
+            conversion_rate = 0.05
+        else:
+            conversion_rate = 0.15
+
         earnings = total_points * conversion_rate
-        return dict(
-            total_points=int(total_points),
-            conversion_rate=conversion_rate,
-            earnings_formatted="{:.2f}".format(earnings)  # force 2 decimal display
-        )
-    
-    def vars_for_template(self):
-        total_points = sum([float(p.payoff) for p in p.player_role == 'consumer'])
-        conversion_rate = 0.15
-        earnings = total_points * conversion_rate
+
         return dict(
             total_points=int(total_points),
             conversion_rate=conversion_rate,

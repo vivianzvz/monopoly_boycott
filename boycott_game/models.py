@@ -23,11 +23,24 @@ class Subsession(BaseSubsession):
         for p in players[1:]:
             p.player_role = 'consumer'
 
+        if self.round_number == 1:
+
+            endowments = random.sample([13, 16, 19, 22, 25], 5)
+            consumers = [p for p in players if p.player_role == 'consumer']
+
+            for p, value in zip(consumers, endowments):
+                p.participant.vars['endowment'] = value
+
         for p in players:
-           if p.player_role == 'consumer':
-               if self.round_number == 1:
-                   p.participant.vars['endowment'] = random.choice([13, 16, 19, 22, 25])
-               p.endowment = p.participant.vars['endowment']
+            if p.player_role == 'consumer':
+                p.endowment = p.participant.vars['endowment']
+
+
+        #for p in players:
+           #if p.player_role == 'consumer':
+               #if self.round_number == 1:
+                   #p.participant.vars['endowment'] = random.choice([13, 16, 19, 22, 25])
+               #p.endowment = p.participant.vars['endowment']
 
 
 class Group(BaseGroup):
